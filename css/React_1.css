@@ -45,3 +45,17 @@ button{
 .cell--win {
   background: #f9d2d2;
 }
+
+
+.reset {
+  width: 100px;
+  height: 30px;
+
+  margin-top: 15px;
+
+  font-size: 20px;
+}
+
+.reset:hover {
+  background: red;
+}

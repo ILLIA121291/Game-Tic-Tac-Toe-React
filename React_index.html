@@ -59,7 +59,12 @@
     const [currentStep, setCurrentStep] = React.useState(SYMBOL_O)
     const [winnerSequence, setWinnerSequence] = React.useState()
 
-    console.log(cells)
+  
+    const hendleResetClick = () => {
+      setCells(Array.from({length: 9}, ()=> null))
+      setCurrentStep(SYMBOL_X)
+      setWinnerSequence(undefined)
+    }
 
     const getSymbolClassName = (symbol) => {
       if(symbol == SYMBOL_O) return 'symbol--o'
@@ -86,13 +91,15 @@
     }
 
     const winerSymbol = winnerSequence ? cells[winnerSequence[0]] : undefined
+    const isDraw = !winnerSequence && cells.filter(value => value).length === 9
 
     
 
     return (
   <div className="game">
       <div className="game-info">
-        {winnerSequence ? 'Победитель': 'Ход'} {renderSymbol(winerSymbol ?? currentStep)}
+        {isDraw ? 'Ничья' : winnerSequence ? 'Победитель ': 'Ход'} 
+        {!isDraw && renderSymbol(winerSymbol ?? currentStep)}
       </div>
     <div class="game-field">
       {cells.map((symbol, index)=>{
@@ -103,7 +110,7 @@
         onClick={() => handleCellClick(index)} >{symbol ? renderSymbol(symbol) : null }</button>
       })}
     </div>
-    <button onClick={(setCells)=> setCells = [null, null, null, null, null, null, null, null, null] }>Очистить</button>
+    <button className="reset" onClick={hendleResetClick}>Очистить</button>
   </div>
     )
   }
